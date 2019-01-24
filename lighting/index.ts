@@ -119,13 +119,13 @@ window.onload = () => {
   };
 
   const bunny = {
-    position: Vec3(0, 0, -10),
+    position: Vec3(0, 0, 0),
     rotation: Vec3(0, 0, 0),
     scale: Vec3(1, 1, 1)
   };
 
   const lightSource = {
-    position: Vec3(10, 10, 0),
+    position: Vec3(0, 12, 0),
     rotation: Vec3(0, 0, 0),
     scale: Vec3(1, 1, 1)
   };
@@ -145,15 +145,17 @@ window.onload = () => {
 
     const projection = getProjectionMatrix(context);
 
-    const lightPos = {
-      ...lightSource.position,
-      x: 10 * Math.cos(context.tick * 0.025),
-      z: 10 * Math.sin(context.tick * 0.025)
-    };
+    // const lightPos = {
+    //   ...lightSource.position,
+    //   y: 10 * Math.sin(context.tick * 0.025)
+    // };
 
     const bunnyModel = getModelMatrix({
       ...bunny,
-      rotation: { ...bunny.rotation, y: context.tick * 0 }
+      position: {
+        ...bunny.position,
+        z: 50 * Math.cos(context.tick * 0.01) * -1 - 50
+      }
     });
 
     drawBunny({
@@ -162,15 +164,12 @@ window.onload = () => {
       view: getViewMatrix(camera),
       viewPos: camera.position,
       projection,
-      lightPos: lightPos,
+      lightPos: lightSource.position,
       material: bunnyMaterial
     });
 
     drawLightSource({
-      model: getModelMatrix({
-        ...lightSource,
-        position: lightPos
-      }),
+      model: getModelMatrix(lightSource),
       view: getViewMatrix(camera),
       projection
     });

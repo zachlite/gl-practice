@@ -30,5 +30,14 @@ void main() {
   vec3 specular = material.specular * spec * lightColor;
 
   vec3 ambient = material.ambient * lightColor;
+
+  // calculate attenuation (assuming point light)
+  float dist  = length(lightPos - fragPos);
+  float attenuation = 1.0 / (1.0 + (0.014 * dist)  + (0.0007 * dist * dist));
+
+  ambient *= attenuation;
+  diffuse *= attenuation;
+  specular *= attenuation;
+
   gl_FragColor = vec4((ambient + diffuse + specular) * objectColor, 1.0);
 }
