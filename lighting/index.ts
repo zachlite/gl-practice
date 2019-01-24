@@ -16,6 +16,10 @@ function Vec3(x, y, z) {
   return { x, y, z };
 }
 
+function Vec3toArray(vec3) {
+  return [vec3.x, vec3.y, vec3.z];
+}
+
 function degreeToRadian(degree) {
   return degree * (Math.PI / 180);
 }
@@ -95,16 +99,12 @@ window.onload = () => {
       normalMatrix: (context, props) => props.normalMatrix,
       objectColor: [1, 0, 0],
       lightColor,
-      viewPos: (context, props) => [
-        props.viewPos.x,
-        props.viewPos.y,
-        props.viewPos.z
-      ],
-      lightPos: (context, props) => [
-        props.lightPos.x,
-        props.lightPos.y,
-        props.lightPos.z
-      ]
+      viewPos: (context, props) => Vec3toArray(props.viewPos),
+      lightPos: (context, props) => Vec3toArray(props.lightPos),
+      "material.ambient": (context, props) => props.material.ambient,
+      "material.diffuse": (context, props) => props.material.diffuse,
+      "material.specular": (context, props) => props.material.specular,
+      "material.shininess": (context, props) => props.material.shininess
     },
     attributes: {
       position: bunnyMesh.positions,
@@ -128,6 +128,13 @@ window.onload = () => {
     position: Vec3(10, 10, 0),
     rotation: Vec3(0, 0, 0),
     scale: Vec3(1, 1, 1)
+  };
+
+  const bunnyMaterial = {
+    ambient: [0.1, 0.1, 0.1],
+    diffuse: [0.8, 0.8, 0.8],
+    specular: [0.25, 0.25, 0.25],
+    shininess: 32.0
   };
 
   regl.frame(context => {
@@ -155,7 +162,8 @@ window.onload = () => {
       view: getViewMatrix(camera),
       viewPos: camera.position,
       projection,
-      lightPos: lightPos
+      lightPos: lightPos,
+      material: bunnyMaterial
     });
 
     drawLightSource({
