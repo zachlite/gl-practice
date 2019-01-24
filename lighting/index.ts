@@ -44,7 +44,7 @@ function getViewMatrix({ position, rotation }) {
   mat4.rotateY(viewMatrix, viewMatrix, degreeToRadian(rotation.y));
   mat4.translate(viewMatrix, viewMatrix, [
     position.x,
-    position.y,
+    position.y * -1,
     position.z * -1
   ]);
   return viewMatrix;
@@ -100,7 +100,12 @@ window.onload = () => {
       objectColor: [1, 0, 0],
       lightColor,
       viewPos: (context, props) => Vec3toArray(props.viewPos),
-      lightPos: (context, props) => Vec3toArray(props.lightPos),
+      "lightPositions[0]": (
+        context,
+        props // TODO: don't hardcode array indices.
+      ) => Vec3toArray(props.lightPositions[0]),
+      "lightPositions[1]": (context, props) =>
+        Vec3toArray(props.lightPositions[1]),
       "material.ambient": (context, props) => props.material.ambient,
       "material.diffuse": (context, props) => props.material.diffuse,
       "material.specular": (context, props) => props.material.specular,
@@ -114,21 +119,19 @@ window.onload = () => {
   });
 
   const camera = {
-    position: Vec3(0, 0, 40),
-    rotation: Vec3(0, 0, 0)
+    position: Vec3(0, 20, 40),
+    rotation: Vec3(20, 0, 0)
   };
 
   const bunny = {
     position: Vec3(0, 0, 0),
     rotation: Vec3(0, 0, 0),
-    scale: Vec3(1, 1, 1)
+    scale: Vec3(0.5, 0.5, 0.5)
   };
 
-  const lightSource = {
-    position: Vec3(0, 12, 0),
-    rotation: Vec3(0, 0, 0),
-    scale: Vec3(1, 1, 1)
-  };
+  // array of positions
+  // assume rotation and scale
+  const lightPositions = [Vec3(-10, 0, 0), Vec3(10, 0, -50)];
 
   const bunnyMaterial = {
     ambient: [0.1, 0.1, 0.1],
@@ -145,33 +148,39 @@ window.onload = () => {
 
     const projection = getProjectionMatrix(context);
 
-    // const lightPos = {
-    //   ...lightSource.position,
-    //   y: 10 * Math.sin(context.tick * 0.025)
-    // };
-
     const bunnyModel = getModelMatrix({
       ...bunny,
       position: {
         ...bunny.position,
-        z: 50 * Math.cos(context.tick * 0.01) * -1 - 50
+        z: 25 * Math.cos(context.tick * 0.025) * -1 - 25
       }
     });
+
+    const view = getViewMatrix(camera);
 
     drawBunny({
       model: bunnyModel,
       normalMatrix: getNormalMatrix(bunnyModel),
-      view: getViewMatrix(camera),
+      view,
       viewPos: camera.position,
       projection,
-      lightPos: lightSource.position,
+      lightPositions,
       material: bunnyMaterial
     });
 
-    drawLightSource({
-      model: getModelMatrix(lightSource),
-      view: getViewMatrix(camera),
-      projection
+    const lightSourceProps = lightPositions.map(light => {
+      return {
+        model: getModelMatrix({
+          position: light,
+          rotation: Vec3(0, 0, 0),
+          scale: Vec3(1, 1, 1)
+        }),
+        view,
+        projection
+      };
     });
+
+    // batch draw
+    drawLightSource(lightSourceProps);
   });
 };
