@@ -95,6 +95,11 @@ window.onload = () => {
       normalMatrix: (context, props) => props.normalMatrix,
       objectColor: [1, 0, 0],
       lightColor,
+      viewPos: (context, props) => [
+        props.viewPos.x,
+        props.viewPos.y,
+        props.viewPos.z
+      ],
       lightPos: (context, props) => [
         props.lightPos.x,
         props.lightPos.y,
@@ -116,7 +121,7 @@ window.onload = () => {
   const bunny = {
     position: Vec3(0, 0, -10),
     rotation: Vec3(0, 0, 0),
-    scale: Vec3(0.5, 0.5, 0.5)
+    scale: Vec3(1, 1, 1)
   };
 
   const lightSource = {
@@ -139,12 +144,16 @@ window.onload = () => {
       z: 10 * Math.sin(context.tick * 0.025)
     };
 
-    const bunnyModel = getModelMatrix(bunny);
+    const bunnyModel = getModelMatrix({
+      ...bunny,
+      rotation: { ...bunny.rotation, y: context.tick * 0 }
+    });
 
     drawBunny({
       model: bunnyModel,
       normalMatrix: getNormalMatrix(bunnyModel),
       view: getViewMatrix(camera),
+      viewPos: camera.position,
       projection,
       lightPos: lightPos
     });
