@@ -1,5 +1,16 @@
-An implementation of the [Phong shading](https://en.wikipedia.org/wiki/Phong_shading) model including ambient, diffuse, and specular lighting components.
+# Learning how to graphic
 
-![](https://media.giphy.com/media/8cErjrxePcW9UX2h35/giphy.gif)
+- [x] Implement [Phong shading](https://en.wikipedia.org/wiki/Phong_shading)
+  - [x] directional light
+  - [x] point light with attenuation
+- [x] Render models from a .obj file with textures
+- [ ] render shadows from directional light
+- [ ] from point light
+- [ ] reuse shader code
 
-Higher res videos are in demo folder.
+### Screenshots
+
+illuminated_bunny.ts
+![bunny](./screenshots/bunny.png)
+illuminated_house.ts
+![House](./screenshots/house.png)
