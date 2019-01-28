@@ -55,5 +55,6 @@ void main() {
     result += calcPointLight(lightPositions[i], norm, fragPos, viewDir); 
   }
 
-  gl_FragColor = vec4(result * objectColor, 1.0);
+  gl_FragColor = vec4(result * vnormal, 1.0);
+  
 }

@@ -2093,6 +2093,11 @@ expand-brackets@^2.1.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
+expand-vertex-data@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/expand-vertex-data/-/expand-vertex-data-1.1.2.tgz#5c8fb300622777f8b47121fa92fe68ef8c221ca1"
+  integrity sha1-XI+zAGInd/i0cSH6kv5o74wiHKE=
+
 extend-shallow@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/extend-shallow/-/extend-shallow-2.0.1.tgz#51af7d614ad9a9f610ea1bafbb989d6b1c56890f"
@@ -5297,6 +5302,11 @@ vm-browserify@0.0.4:
   integrity sha1-XX6kW7755Kb/ZflUOOCofDV9WnM=
   dependencies:
     indexof "0.0.1"
+
+wavefront-obj-parser@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/wavefront-obj-parser/-/wavefront-obj-parser-2.0.1.tgz#b3a026edd255a4e2987eefe53867afa291e00555"
+  integrity sha512-/jQ6YJY96nL5gASw+gk0XP73DSGJE0zGrmL+19BVssvSEUOxXyKrW6v8Ozk6qAsd/bh0BtshYV0/kjjupZw9Pw==
 
 wcwidth@^1.0.1:
   version "1.0.1"
