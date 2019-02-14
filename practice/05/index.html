@@ -1,4 +1,57 @@
 <html>
-  <body></body>
+  <head>
+    <style>
+      body {
+        font-family: "menlo";
+      }
+    </style>
+  </head>
+
+  <body>
+    <label> Cell Count </label>
+    <input id="cell-count" type="range" min="7" max="13" step="1" value="10" />
+    <label id="cell-count-label"> 1024 </label>
+    <br /><br />
+
+    <label> Draw Bunny Mesh </label>
+    <input id="show-bunny" type="checkbox" />
+    <br /><br />
+
+    <label> Translation X </label>
+    <input
+      id="translate-x"
+      type="range"
+      min="-1"
+      max="1"
+      step=".001"
+      value="0"
+    />
+    <br /><br />
+
+    <label> Translation Y </label>
+    <input
+      id="translate-y"
+      type="range"
+      min="-1"
+      max="0"
+      step=".001"
+      value="0"
+    />
+    <br /><br />
+
+    <label> Translation Z </label>
+    <input
+      id="translate-z"
+      type="range"
+      min="-1"
+      max="1"
+      step=".001"
+      value="0"
+    />
+    <br />
+
+    <canvas id="canvas" width="1080" height="720"></canvas>
+  </body>
+
   <script src="./index.ts"></script>
 </html>

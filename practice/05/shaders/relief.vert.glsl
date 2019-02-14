@@ -13,7 +13,5 @@ void main() {
 
   vec4 worldPos = model * vec4(position, 1.0);
   gl_Position = projection * view * worldPos;
-
-  // need the fragment's position in depth space
   vPositionDepthSpace = (depthProjection * depthView * worldPos).xyz;
 }
