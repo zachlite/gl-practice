@@ -15,4 +15,4 @@ illuminated_bunny.ts
 illuminated_house.ts
 ![House](./screenshots/house.png)
 
-<div style='position:relative; padding-bottom:calc(68.50% + 44px)'><iframe src='https://gfycat.com/ifr/SingleTerribleBrahmancow' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>
+![Shadows](https://thumbs.gfycat.com/SingleTerribleBrahmancow-size_restricted.gif)
